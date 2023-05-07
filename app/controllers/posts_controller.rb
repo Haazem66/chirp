@@ -15,7 +15,6 @@ class PostsController < ApplicationController
         #getting the required info from the form
         @post = Post.new(params.require(:post).permit(:title, :description))
 
-        if 
         
        if @post.save
         #redirecting to the new made post
