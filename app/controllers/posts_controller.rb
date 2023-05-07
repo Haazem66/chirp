@@ -5,6 +5,10 @@ class PostsController < ApplicationController
     def index
         @posts = Post.all
     end
+    
+    def edit
+        @post = Post.find(params[:id])
+    end
 
     def new
         #to make available instance for error checking
@@ -24,6 +28,19 @@ class PostsController < ApplicationController
         #rendering the form again and displaying error messages
            render 'new'
        end
+    end
+
+    def update
+        @post = Post.find(params[:id])
+        if @post.update(params.require(:post).permit(:title, :description))
+            flash[:notice] = "Post was updated successfully"
+            redirect_to @post
+        else
+            render 'edit'
+        end
+
+        
+
     end
 
 end
